@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+      }
+
+      :root {
+        color-scheme: dark light;
+        --font-color: #333333;
+        --background: #eeeeee;
+        --background-alpha: rgba(238, 238, 238, 0.8);
+        --accent: rgb(54, 142, 66);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --font-color: #dddddd;
+          --background: #222222;
+          --background-alpha: rgba(34, 34, 34, 0.8);
+          --accent: rgb(45, 118, 53);
+        }
+      }
+
+      html {
+        font-size: 16px;
+        color: var(--font-color);
+        background-color: var(--background);
+        text-shadow: var(--background) 1px 1px 4px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      ul {
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+      }
+    </style>
+    <title>about:custom-home</title>
+  </head>
+  <body
+    style="
+      height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      font-family: Calibri, sans-serif;
+    "
+  >
+    <div
+      style="
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      "
+    >
+      <div>
+        <h1
+          id="time"
+          style="
+            font-size: 5.6rem;
+            text-align: center;
+            text-shadow: var(--background) 1px 1px 4px;
+          "
+        ></h1>
+        <h2
+          id="greeting"
+          style="
+            font-size: 4rem;
+            text-align: center;
+            text-shadow: var(--background) 1px 1px 4px;
+          "
+        >
+          Hi there 👋
+        </h2>
+      </div>
+      <div>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+          "
+        >
+          <div>
+            <h4 style="font-size: 2rem" id="text-year">Year</h4>
+            <progress
+              id="progress-year"
+              style="
+                width: 30ch;
+                accent-color: var(--accent);
+                box-shadow: 1px 1px 4px var(--background);
+              "
+              min="0"
+              max="100"
+            ></progress>
+          </div>
+          <div>
+            <h4 style="font-size: 2rem" id="text-month">Month</h4>
+            <progress
+              id="progress-month"
+              style="
+                width: 30ch;
+                accent-color: var(--accent);
+                box-shadow: 1px 1px 4px var(--background);
+              "
+              min="0"
+              max="100"
+            ></progress>
+          </div>
+          <div>
+            <h4 style="font-size: 2rem" id="text-day">Day</h4>
+            <progress
+              id="progress-day"
+              style="
+                width: 30ch;
+                accent-color: var(--accent);
+                box-shadow: 1px 1px 4px var(--background);
+              "
+              min="0"
+              max="100"
+            ></progress>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const yourName = "David";
+      const updateIntervalSeconds = 15;
+      const precision = 0;
+      const useUnsplash = true;
+      const unsplashFilter = "?nature,plants,dark"
+
+      const greeting = document.getElementById("greeting");
+      const progressYear = document.getElementById("progress-year");
+      const progressMonth = document.getElementById("progress-month");
+      const progressDay = document.getElementById("progress-day");
+      const textYear = document.getElementById("text-year");
+      const textMonth = document.getElementById("text-month");
+      const textDay = document.getElementById("text-day");
+
+      if (useUnsplash)
+        document.body.style.backgroundImage = `url("https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}/${unsplashFilter}")`;
+
+      const calcPercentage = (start, end, now, precision) => {
+        return (
+          100 *
+          ((now.getTime() - start.getTime()) /
+            (end.getTime() - start.getTime()))
+        ).toFixed(precision);
+      };
+
+      const clock = () => {
+        const now = new Date();
+        const time = document.getElementById("time");
+        const timeString = now.toLocaleTimeString([], { timeStyle: "short" });
+        time.innerHTML = timeString;
+        document.title = `${timeString} - about:custom-home`;
+      };
+
+      const update = () => {
+        const now = new Date();
+
+        // Update greeting
+        let greetingPhrase = "Good morning";
+        if (now.getHours() > 18) greetingPhrase = "Good evening";
+        else if (now.getHours() > 12) greetingPhrase = "Good afternoon";
+        greeting.innerHTML = `${greetingPhrase}, ${yourName}.`;
+
+        const yearStart = new Date(now.getFullYear(), 0, 1);
+        const yearEnd = new Date(now.getFullYear() + 1, 0, 1);
+        const yearPercentage = calcPercentage(
+          yearStart,
+          yearEnd,
+          now,
+          precision
+        );
+        progressYear.setAttribute("value", yearPercentage);
+        progressYear.innerHTML = `${yearPercentage}%`;
+        textYear.innerHTML = `Year: ${yearPercentage}%`;
+
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+        const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+        const monthPercentage = calcPercentage(
+          monthStart,
+          monthEnd,
+          now,
+          precision
+        );
+        progressMonth.setAttribute("value", monthPercentage);
+        progressMonth.innerHTML = `${monthPercentage}%`;
+        textMonth.innerHTML = `Month: ${monthPercentage}%`;
+
+        const dayStart = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate()
+        );
+        const dayEnd = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate() + 1
+        );
+        const dayPercentage = calcPercentage(dayStart, dayEnd, now, precision);
+        progressDay.setAttribute("value", dayPercentage);
+        progressDay.innerHTML = `${dayPercentage}%`;
+        textDay.innerHTML = `Day: ${dayPercentage}%`;
+      };
+
+      clock();
+      window.setInterval(clock, 1000);
+
+      update();
+      window.setInterval(update, updateIntervalSeconds * 1000);
+    </script>
+  </body>
+</html>
