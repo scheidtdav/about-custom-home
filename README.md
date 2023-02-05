@@ -13,6 +13,8 @@ Tested in the following browsers:
 - Chrome 109
 - Microsoft Edge 109
 
+![Example of what it looks like](./img/example.png?raw=true "Here is an example of what about:custom-home may look like")
+
 ## Usage
 To customize some things, find the beginning of the `<script>` tag at the bottom of the html document.
 Modify the following constants to your liking:
