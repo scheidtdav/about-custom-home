@@ -173,8 +173,8 @@
 
         // Update greeting
         let greetingPhrase = "Good morning";
-        if (now.getHours() > 18) greetingPhrase = "Good evening";
-        else if (now.getHours() > 12) greetingPhrase = "Good afternoon";
+        if (now.getHours() >= 18) greetingPhrase = "Good evening";
+        else if (now.getHours() >= 12) greetingPhrase = "Good afternoon";
         greeting.innerHTML = `${greetingPhrase}, ${yourName}.`;
 
         const yearStart = new Date(now.getFullYear(), 0, 1);
