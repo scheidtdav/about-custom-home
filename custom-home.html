@@ -139,7 +139,7 @@
       const updateIntervalSeconds = 15;
       const precision = 0;
       const useUnsplash = true;
-      const unsplashFilter = "?nature,plants,dark"
+      const unsplashFilter = "?nature,plants,dark";
 
       const greeting = document.getElementById("greeting");
       const progressYear = document.getElementById("progress-year");
@@ -149,8 +149,12 @@
       const textMonth = document.getElementById("text-month");
       const textDay = document.getElementById("text-day");
 
-      if (useUnsplash)
-        document.body.style.backgroundImage = `url("https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}/${unsplashFilter}")`;
+      const setupBackground = () => {
+        if (useUnsplash)
+          document.body.style.backgroundImage = `url("https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}/${unsplashFilter}")`;
+      };
+      setupBackground();
+      window.addEventListener("resize", setupBackground);
 
       const calcPercentage = (start, end, now, precision) => {
         return (
