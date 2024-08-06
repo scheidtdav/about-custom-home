@@ -89,6 +89,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+            flex-wrap: wrap;
           "
         >
           <div>
@@ -138,8 +139,8 @@
       const yourName = "David";
       const updateIntervalSeconds = 15;
       const precision = 0;
-      const useUnsplash = true;
-      const unsplashFilter = "?nature,plants,dark";
+      const usePicsum = true;
+      const filters = "";
 
       const greeting = document.getElementById("greeting");
       const progressYear = document.getElementById("progress-year");
@@ -150,8 +151,8 @@
       const textDay = document.getElementById("text-day");
 
       const setupBackground = () => {
-        if (useUnsplash)
-          document.body.style.backgroundImage = `url("https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}/${unsplashFilter}")`;
+        if (usePicsum)
+          document.body.style.backgroundImage = `url("https://picsum.photos/${window.innerWidth}/${window.innerHeight}/${filters}")`;
       };
       setupBackground();
       window.addEventListener("resize", setupBackground);
