@@ -9,7 +9,7 @@ Go to your browser settings, change your homepage to a URL and paste the address
 Restart your browser to see the effect.
 
 Tested in the following browsers:
-- Firefox 109.0.1
+- Firefox 128.0.3
 - Chrome 109
 - Microsoft Edge 109
 
@@ -21,8 +21,8 @@ Modify the following constants to your liking:
 - `yourName`: Put your name here so the script knows how to greet you
 - `updateIntervalSeconds`: Changes the time between updates of the progress bars
 - `precision`: Modify the number of decimals of the progress bars
-- `useUnsplash`: Set this to `true` to get a random background image from [Unsplash](https://unsplash.com/). Use `false` to use neutral colors (depending on whether light or dark mode is used)
-- `unsplashFilter`: Only has an effect when `useUnsplash` is active. Use this to filter for topics of your liking and limit what images you get. Separate topics by a comma and keep the `?` in front. If you want all images, use an empty string.
+- `usePicsum`: Set this to `true` to get a random background image from [Unsplash](https://unsplash.com/). Use `false` to use neutral colors (depending on whether light or dark mode is used)
+- `filter`: Only has an effect when `usePicsum` is active. Use this to apply filters such as `grayscale` or `blur` (see [whats possible](https://picsum.photos/)). Separate filters by a comma and keep the `?` in front. If you want no filters, use an empty string.
 
 ## Contributing
 Pull requests are welcome.
