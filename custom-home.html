@@ -44,6 +44,12 @@
         padding: 0;
         font-weight: normal;
       }
+
+      #bookmarks::before,
+      #bookmarks::after {
+        content: "";
+        margin: auto;
+      }
     </style>
     <title>about:custom-home</title>
   </head>
@@ -83,6 +89,19 @@
           Hi there 👋
         </h2>
       </div>
+      <div
+        id="bookmarks"
+        style="
+          max-width: 100%;
+          overflow-y: hidden;
+          overflow-x: scroll;
+          scrollbar-gutter: stable;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          gap: 1rem;
+        "
+      ></div>
       <div>
         <div
           style="
@@ -141,6 +160,9 @@
       const precision = 0;
       const usePicsum = true;
       const filters = "";
+      const bookmarkItems = [
+        //["https://github.com/", "https://github.com/fluidicon.png"],
+      ];
 
       const greeting = document.getElementById("greeting");
       const progressYear = document.getElementById("progress-year");
@@ -149,6 +171,7 @@
       const textYear = document.getElementById("text-year");
       const textMonth = document.getElementById("text-month");
       const textDay = document.getElementById("text-day");
+      const bookmarksSection = document.getElementById("bookmarks");
 
       const setupBackground = () => {
         if (usePicsum)
@@ -222,11 +245,28 @@
         textDay.innerHTML = `Day: ${dayPercentage}%`;
       };
 
+      const bookmarks = () => {
+        if (bookmarkItems.length === 0) return;
+
+        let bookmarksHtml = "";
+        for (const i of bookmarkItems) {
+          bookmarksHtml += `<div style="aspect-ratio: 1; width: 20ch"> \
+            <a href="${i[0]}"> \
+              <img style="height: 100%; object-fit: contain" src="${i[1]}" /> \
+            </a> \
+          </div>`;
+        }
+
+        bookmarksSection.innerHTML = bookmarksHtml;
+      };
+
       clock();
       window.setInterval(clock, 1000);
 
       update();
       window.setInterval(update, updateIntervalSeconds * 1000);
+
+      bookmarks();
     </script>
   </body>
 </html>
