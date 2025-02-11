@@ -8,11 +8,6 @@ Open the file in your browser and copy the address from the address bar (should 
 Go to your browser settings, change your homepage to a URL and paste the address copied previously.
 Restart your browser to see the effect.
 
-Tested in the following browsers:
-- Firefox 128.0.3
-- Chrome 109
-- Microsoft Edge 109
-
 ![Example of what it looks like](./img/example.png?raw=true "Here is an example of what about:custom-home may look like")
 
 ## Usage
@@ -23,7 +18,7 @@ Modify the following constants to your liking:
 - `precision`: Modify the number of decimals of the progress bars
 - `usePicsum`: Set this to `true` to get a random background image from [Unsplash](https://unsplash.com/). Use `false` to use neutral colors (depending on whether light or dark mode is used)
 - `filter`: Only has an effect when `usePicsum` is active. Use this to apply filters such as `grayscale` or `blur` (see [whats possible](https://picsum.photos/)). Separate filters by a comma and keep the `?` in front. If you want no filters, use an empty string.
-- `bookmarkItems`: Add an error containing two values per bookmark that you want to be displayed. The first value will be the link the bookmark points to. The second should be an image that is being displayed for you to click on. Use an empty array `[]` to hide bookmarks entirely.
+- `bookmarkItems`: Add arrays containing two values per bookmark that you want to be displayed. The first value will be the link the bookmark points to. The second should be an image that is being displayed for you to click on. Use an empty array `[]` to hide bookmarks entirely.
 
 ## Contributing
 Pull requests are welcome.
